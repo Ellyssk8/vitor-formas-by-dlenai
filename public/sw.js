@@ -1,9 +1,10 @@
-const CACHE_NAME = 'vitor-forms-v3';
+const CACHE_NAME = 'vitor-forms-v4';
 const urlsToCache = [
   '/',
   '/manifest.json',
   '/icon-192.png',
-  '/icon-512.png'
+  '/icon-512.png',
+  '/apple-touch-icon.png'
 ];
 
 // Install event - cache resources
@@ -15,6 +16,7 @@ self.addEventListener('install', (event) => {
         return cache.addAll(urlsToCache);
       })
   );
+  self.skipWaiting();
 });
 
 // Fetch event - serve cached content when offline
@@ -26,15 +28,22 @@ self.addEventListener('fetch', (event) => {
           return response;
         }
         return fetch(event.request).then((response) => {
-          // Cache successful responses
-          if (!response || response.status !== 200 || response.type !== 'basic') {
+          // Não cachear requisições não-GET ou de outras origens
+          if (event.request.method !== 'GET' || !response || response.status !== 200) {
             return response;
           }
+          
+          // Cachear a resposta
           const responseToCache = response.clone();
           caches.open(CACHE_NAME).then((cache) => {
             cache.put(event.request, responseToCache);
           });
           return response;
+        }).catch(() => {
+          // Se falhar e for uma navegação, retorna a página principal do cache
+          if (event.request.mode === 'navigate') {
+            return caches.match('/');
+          }
         });
       })
   );
@@ -52,6 +61,6 @@ self.addEventListener('activate', (event) => {
           }
         })
       );
-    })
+    }).then(() => self.clients.claim())
   );
 });
