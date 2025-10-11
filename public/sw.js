@@ -1,11 +1,9 @@
-const CACHE_NAME = 'vitor-forms-v1';
+const CACHE_NAME = 'vitor-forms-v2';
 const urlsToCache = [
   '/',
   '/manifest.json',
-  '/src/main.tsx',
-  '/src/index.css',
-  '/src/assets/vitor-character.png',
-  '/src/assets/geometric-shapes.png'
+  '/icon-192.png',
+  '/icon-512.png'
 ];
 
 // Install event - cache resources
@@ -24,10 +22,21 @@ self.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.match(event.request)
       .then((response) => {
-        // Return cached version or fetch from network
-        return response || fetch(event.request);
-      }
-    )
+        if (response) {
+          return response;
+        }
+        return fetch(event.request).then((response) => {
+          // Cache successful responses
+          if (!response || response.status !== 200 || response.type !== 'basic') {
+            return response;
+          }
+          const responseToCache = response.clone();
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put(event.request, responseToCache);
+          });
+          return response;
+        });
+      })
   );
 });
 
