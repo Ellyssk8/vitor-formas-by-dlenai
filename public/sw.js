@@ -1,4 +1,4 @@
-const CACHE_NAME = 'vitor-forms-v2';
+const CACHE_NAME = 'vitor-forms-v3';
 const urlsToCache = [
   '/',
   '/manifest.json',
