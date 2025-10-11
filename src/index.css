@@ -1,0 +1,136 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Vitor Forms Game Design System - Vibrant colors for children with autism
+All colors MUST be HSL for accessibility and design consistency.
+*/
+
+@layer base {
+  :root {
+    /* Game Background */
+    --background: 220 15% 95%;
+    --foreground: 220 15% 15%;
+
+    /* Game Interface */
+    --card: 0 0% 100%;
+    --card-foreground: 220 15% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 15% 15%;
+
+    /* Primary Game Colors */
+    --primary: 230 100% 50%; /* Bright blue for Vitor's theme */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 220 15% 88%;
+    --secondary-foreground: 220 15% 15%;
+
+    --muted: 220 15% 92%;
+    --muted-foreground: 220 15% 45%;
+
+    --accent: 45 100% 55%; /* Bright yellow for highlights */
+    --accent-foreground: 220 15% 15%;
+
+    /* Game Action Colors */
+    --success: 120 60% 50%; /* Green for correct answers */
+    --success-foreground: 0 0% 100%;
+    
+    --play-button: 0 85% 60%; /* Coral red for play button */
+    --play-button-foreground: 0 0% 100%;
+
+    /* Geometric Shape Colors */
+    --shape-pink: 330 80% 75%; /* Pink square/pentagon */
+    --shape-purple: 270 60% 60%; /* Purple hexagon */
+    --shape-green: 120 60% 55%; /* Green circle/triangle */
+    --shape-red: 0 75% 60%; /* Red octagon */
+    --shape-turquoise: 180 60% 60%; /* Turquoise oval/star */
+    --shape-orange: 30 90% 65%; /* Orange diamond */
+    --shape-blue: 220 80% 65%; /* Blue triangle */
+    --shape-yellow: 45 95% 65%; /* Yellow accents */
+
+    /* Interactive Elements */
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 15% 85%;
+    --input: 220 15% 88%;
+    --ring: 230 100% 50%;
+
+    --radius: 1rem; /* Larger radius for child-friendly design */
+
+    /* Game Specific Variables */
+    --game-shadow: 0 8px 32px hsla(220, 15%, 15%, 0.1);
+    --shape-shadow: 0 4px 16px hsla(220, 15%, 15%, 0.15);
+    --button-shadow: 0 6px 20px hsla(0, 85%, 60%, 0.3);
+    
+    /* Animations */
+    --bounce-duration: 0.6s;
+    --gentle-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --smooth-ease: cubic-bezier(0.4, 0, 0.2, 1);
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
