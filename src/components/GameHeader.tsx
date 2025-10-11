@@ -40,7 +40,7 @@ const GameHeader: React.FC<GameHeaderProps> = ({
         <img 
           src={vitorFormasLogo} 
           alt="Vitor Formas"
-          className="h-10 sm:h-14 md:h-16 lg:h-20 w-auto object-contain"
+          className="h-8 sm:h-10 md:h-12 w-auto object-contain"
         />
       </div>
 
