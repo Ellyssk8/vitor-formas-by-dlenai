@@ -22,6 +22,7 @@ export const useGameAudio = (): UseGameAudioReturn => {
   const backgroundMusicRef = useRef<HTMLAudioElement | null>(null);
   const menuMusicRef = useRef<HTMLAudioElement | null>(null);
   const hasInteractedRef = useRef(false);
+  const activeMusicRef = useRef<'menu' | 'background' | null>(null);
 
   const playAudioFile = useCallback((audioSrc: string, volume: number = 0.5) => {
     if (isMuted) return;
@@ -48,11 +49,10 @@ export const useGameAudio = (): UseGameAudioReturn => {
           menuMusicRef.current.pause();
         }
       } else {
-        // Only resume if the music was already created and was paused by mute
-        if (backgroundMusicRef.current && backgroundMusicRef.current.paused && hasInteractedRef.current) {
+        // Retoma apenas a música que deveria estar ativa
+        if (activeMusicRef.current === 'background' && backgroundMusicRef.current && hasInteractedRef.current) {
           backgroundMusicRef.current.play().catch(console.log);
-        }
-        if (menuMusicRef.current && menuMusicRef.current.paused && hasInteractedRef.current) {
+        } else if (activeMusicRef.current === 'menu' && menuMusicRef.current && hasInteractedRef.current) {
           menuMusicRef.current.play().catch(console.log);
         }
       }
@@ -81,6 +81,8 @@ export const useGameAudio = (): UseGameAudioReturn => {
       menuMusicRef.current.currentTime = 0;
     }
     
+    activeMusicRef.current = 'background';
+    
     if (!backgroundMusicRef.current) {
       backgroundMusicRef.current = new Audio(backgroundMusic);
       backgroundMusicRef.current.loop = true;
@@ -100,6 +102,9 @@ export const useGameAudio = (): UseGameAudioReturn => {
       backgroundMusicRef.current.pause();
       backgroundMusicRef.current.currentTime = 0;
     }
+    if (activeMusicRef.current === 'background') {
+      activeMusicRef.current = null;
+    }
   }, []);
 
   const playMenuMusic = useCallback(() => {
@@ -110,6 +115,8 @@ export const useGameAudio = (): UseGameAudioReturn => {
       backgroundMusicRef.current.pause();
       backgroundMusicRef.current.currentTime = 0;
     }
+    
+    activeMusicRef.current = 'menu';
     
     if (!menuMusicRef.current) {
       menuMusicRef.current = new Audio(menuMusic);
@@ -129,7 +136,7 @@ export const useGameAudio = (): UseGameAudioReturn => {
         if (!hasInteractedRef.current) {
           const playOnInteraction = () => {
             hasInteractedRef.current = true;
-            if (menuMusicRef.current && !isMuted) {
+            if (menuMusicRef.current && !isMuted && activeMusicRef.current === 'menu') {
               menuMusicRef.current.play().catch(console.log);
             }
             document.removeEventListener('click', playOnInteraction);
@@ -148,6 +155,9 @@ export const useGameAudio = (): UseGameAudioReturn => {
     if (menuMusicRef.current) {
       menuMusicRef.current.pause();
       menuMusicRef.current.currentTime = 0;
+    }
+    if (activeMusicRef.current === 'menu') {
+      activeMusicRef.current = null;
     }
   }, []);
 
