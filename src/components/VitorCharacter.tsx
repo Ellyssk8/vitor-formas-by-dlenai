@@ -1,6 +1,6 @@
 import React from "react";
 import { cn } from "@/lib/utils";
-import vitorImage from "@/assets/vitor-character-new.png";
+import vitorImage from "@/assets/vitor-character-animated.gif";
 
 interface VitorCharacterProps {
   message?: string;
