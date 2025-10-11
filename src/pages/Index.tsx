@@ -30,20 +30,17 @@ const Index = () => {
   // Play menu music when on menu
   useEffect(() => {
     if (currentMode === GameMode.MENU) {
-      playMenuMusic();
       stopBackgroundMusic();
+      playMenuMusic();
     } else {
       stopMenuMusic();
+      playBackgroundMusic();
     }
-  }, [currentMode, playMenuMusic, stopMenuMusic, stopBackgroundMusic]);
+  }, [currentMode, playMenuMusic, stopMenuMusic, stopBackgroundMusic, playBackgroundMusic]);
 
   const handleModeSelect = (mode: GameMode) => {
     playClickSound();
     setCurrentMode(mode);
-    if (mode !== GameMode.MENU) {
-      stopMenuMusic();
-      playBackgroundMusic();
-    }
   };
 
   const handleCorrectAnswer = () => {
@@ -71,7 +68,6 @@ const Index = () => {
 
   const handleGoHome = () => {
     playClickSound();
-    stopBackgroundMusic();
     setCurrentMode(GameMode.MENU);
   };
 

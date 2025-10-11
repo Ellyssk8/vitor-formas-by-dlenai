@@ -75,15 +75,24 @@ export const useGameAudio = (): UseGameAudioReturn => {
   const playBackgroundMusic = useCallback(() => {
     if (isMuted) return;
     
+    // Para a música do menu se estiver tocando
+    if (menuMusicRef.current && !menuMusicRef.current.paused) {
+      menuMusicRef.current.pause();
+      menuMusicRef.current.currentTime = 0;
+    }
+    
     if (!backgroundMusicRef.current) {
       backgroundMusicRef.current = new Audio(backgroundMusic);
       backgroundMusicRef.current.loop = true;
       backgroundMusicRef.current.volume = 0.3;
     }
     
-    backgroundMusicRef.current.play().catch(error => {
-      console.log('Background music playback failed:', error);
-    });
+    // Só toca se não estiver já tocando
+    if (backgroundMusicRef.current.paused) {
+      backgroundMusicRef.current.play().catch(error => {
+        console.log('Background music playback failed:', error);
+      });
+    }
   }, [isMuted]);
 
   const stopBackgroundMusic = useCallback(() => {
@@ -95,6 +104,12 @@ export const useGameAudio = (): UseGameAudioReturn => {
 
   const playMenuMusic = useCallback(() => {
     if (isMuted) return;
+    
+    // Para a música de jogo se estiver tocando
+    if (backgroundMusicRef.current && !backgroundMusicRef.current.paused) {
+      backgroundMusicRef.current.pause();
+      backgroundMusicRef.current.currentTime = 0;
+    }
     
     if (!menuMusicRef.current) {
       menuMusicRef.current = new Audio(menuMusic);
