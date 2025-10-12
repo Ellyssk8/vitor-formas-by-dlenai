@@ -80,6 +80,7 @@ const Index = () => {
             onCorrectAnswer={handleCorrectAnswer}
             onErrorAnswer={playErrorSound}
             onNext={handleNext}
+            level={level}
           />
         );
       case GameMode.COUNTING:
@@ -89,6 +90,7 @@ const Index = () => {
             onCorrectAnswer={handleCorrectAnswer}
             onErrorAnswer={playErrorSound}
             onNext={handleNext}
+            level={level}
           />
         );
       case GameMode.MATCHING:
@@ -98,6 +100,7 @@ const Index = () => {
             onCorrectAnswer={handleCorrectAnswer}
             onErrorAnswer={playErrorSound}
             onNext={handleNext}
+            level={level}
           />
         );
       default:

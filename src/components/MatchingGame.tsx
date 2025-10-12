@@ -12,6 +12,7 @@ interface MatchingGameProps {
   onErrorAnswer: () => void;
   onNext: () => void;
   className?: string;
+  level?: number;
 }
 
 interface DraggedShape extends GeometricShape {
@@ -33,6 +34,7 @@ const MatchingGame: React.FC<MatchingGameProps> = ({
   onErrorAnswer,
   onNext,
   className,
+  level = 1,
 }) => {
   const [gameShapes, setGameShapes] = useState<DraggedShape[]>([]);
   const [dropZones, setDropZones] = useState<DropZone[]>([]);
@@ -42,11 +44,38 @@ const MatchingGame: React.FC<MatchingGameProps> = ({
   const [vitorMessage, setVitorMessage] = useState(gameMessages.instructions.matching);
   const gameAreaRef = useRef<HTMLDivElement>(null);
 
+  const getNumberOfPairs = () => {
+    // Níveis 1-2: 2 pares (6-7 anos)
+    if (level <= 2) return 2;
+    // Níveis 3-5: 3 pares (8-10 anos)
+    if (level <= 5) return 3;
+    // Níveis 6-7: 4 pares (11 anos)
+    if (level <= 7) return 4;
+    // Níveis 8+: 5 pares (12 anos)
+    return 5;
+  };
+
+  const getDifficultyShapes = () => {
+    // Níveis 1-3: Formas básicas
+    if (level <= 3) {
+      return shapes.filter(s => ['square', 'rectangle', 'triangle', 'circle', 'pentagon'].includes(s.id));
+    }
+    // Níveis 4-6: Formas intermediárias
+    if (level <= 6) {
+      return shapes.filter(s => !['star', 'parallelogram'].includes(s.id));
+    }
+    // Níveis 7+: Todas as formas
+    return shapes;
+  };
+
   const generateMatchingGame = () => {
-    // Select 4 random shapes for the game
-    const selectedShapes = shapes
+    const availableShapes = getDifficultyShapes();
+    const numPairs = getNumberOfPairs();
+    
+    // Select random shapes for the matching game
+    const selectedShapes = availableShapes
       .sort(() => Math.random() - 0.5)
-      .slice(0, 4);
+      .slice(0, numPairs);
 
     // Create draggable shapes positioned on the left side (will be positioned by CSS)
     const newGameShapes: DraggedShape[] = selectedShapes.map((shape, index) => ({
@@ -152,7 +181,8 @@ const MatchingGame: React.FC<MatchingGameProps> = ({
           setMatchedPairs(prev => prev + 1);
           onCorrectAnswer();
           
-          if (matchedPairs + 1 === gameShapes.length) {
+          const totalPairs = getNumberOfPairs();
+          if (matchedPairs + 1 === totalPairs) {
             setShowCelebration(true);
             setVitorMessage("EXCELENTE TRABALHO! VOCÊ DOMINOU O RECONHECIMENTO DE FORMAS GEOMÉTRICAS!");
           }
@@ -311,7 +341,7 @@ const MatchingGame: React.FC<MatchingGameProps> = ({
 
       {/* Progress Indicator */}
       <div className="flex space-x-2 animate-fade-in-up" style={{ animationDelay: "0.8s" }}>
-        {Array.from({ length: gameShapes.length }, (_, index) => (
+        {Array.from({ length: getNumberOfPairs() }, (_, index) => (
           <div
             key={index}
             className={cn(
