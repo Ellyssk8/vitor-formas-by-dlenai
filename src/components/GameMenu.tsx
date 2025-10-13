@@ -7,7 +7,6 @@ import vitorFormasLogo from "@/assets/vitor-formas-logo.png";
 import identificarFormas from "@/assets/identificar-formas.svg";
 import corresponderFormas from "@/assets/corresponder-formas.svg";
 import contarLados from "@/assets/contar-lados.svg";
-import matchThreeGame from "@/assets/match-three-game.png";
 import playButton from "@/assets/play-button.png";
 import soundOn from "@/assets/icons/sound-on.png";
 import soundOff from "@/assets/icons/sound-off.png";
@@ -36,11 +35,6 @@ const GameMenu: React.FC<GameMenuProps> = ({ onSelectMode, className, isMuted, o
       mode: GameMode.COUNTING,
       image: contarLados,
       alt: "Contar Lados",
-    },
-    {
-      mode: GameMode.MATCH_THREE,
-      image: matchThreeGame,
-      alt: "Match 3 - Formas",
     },
   ];
 

@@ -30,9 +30,7 @@ export const useGameAudio = (): UseGameAudioReturn => {
     try {
       const audio = new Audio(audioSrc);
       audio.volume = volume;
-      audio.play().then(() => {
-        hasInteractedRef.current = true;
-      }).catch(error => {
+      audio.play().catch(error => {
         console.log('Audio playback failed:', error);
       });
     } catch (error) {
@@ -91,31 +89,12 @@ export const useGameAudio = (): UseGameAudioReturn => {
       backgroundMusicRef.current.volume = 0.3;
     }
     
-    // Se já está tocando, não faz nada
-    if (!backgroundMusicRef.current.paused) return;
-    
-    const attemptPlay = () => {
-      backgroundMusicRef.current?.play().then(() => {
-        hasInteractedRef.current = true;
-      }).catch(error => {
+    // Só toca se não estiver já tocando
+    if (backgroundMusicRef.current.paused) {
+      backgroundMusicRef.current.play().catch(error => {
         console.log('Background music playback failed:', error);
-        // Se falhar, tenta novamente após primeira interação do usuário
-        if (!hasInteractedRef.current) {
-          const playOnInteraction = () => {
-            hasInteractedRef.current = true;
-            if (backgroundMusicRef.current && !isMuted && activeMusicRef.current === 'background') {
-              backgroundMusicRef.current.play().catch(console.log);
-            }
-            document.removeEventListener('click', playOnInteraction);
-            document.removeEventListener('touchstart', playOnInteraction);
-          };
-          document.addEventListener('click', playOnInteraction, { once: true });
-          document.addEventListener('touchstart', playOnInteraction, { once: true });
-        }
       });
-    };
-    
-    attemptPlay();
+    }
   }, [isMuted]);
 
   const stopBackgroundMusic = useCallback(() => {

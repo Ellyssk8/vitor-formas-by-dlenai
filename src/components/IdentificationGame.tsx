@@ -13,7 +13,6 @@ interface IdentificationGameProps {
   onErrorAnswer: () => void;
   onNext: () => void;
   className?: string;
-  level?: number;
 }
 
 const IdentificationGame: React.FC<IdentificationGameProps> = ({
@@ -22,7 +21,6 @@ const IdentificationGame: React.FC<IdentificationGameProps> = ({
   onErrorAnswer,
   onNext,
   className,
-  level = 1,
 }) => {
   const [currentShape, setCurrentShape] = useState<GeometricShape | null>(null);
   const [options, setOptions] = useState<GeometricShape[]>([]);
@@ -31,47 +29,19 @@ const IdentificationGame: React.FC<IdentificationGameProps> = ({
   const [isCorrect, setIsCorrect] = useState(false);
   const [vitorMessage, setVitorMessage] = useState(gameMessages.instructions.identification);
 
-  const getDifficultyShapes = () => {
-    // Níveis 1-3: Formas básicas (6-8 anos)
-    if (level <= 3) {
-      return shapes.filter(s => ['square', 'rectangle', 'triangle', 'circle'].includes(s.id));
-    }
-    // Níveis 4-6: Adicionar formas intermediárias (9-10 anos)
-    if (level <= 6) {
-      return shapes.filter(s => !['star', 'parallelogram'].includes(s.id));
-    }
-    // Níveis 7+: Todas as formas (11-12 anos)
-    return shapes;
-  };
-
-  const getNumberOfOptions = () => {
-    // Níveis 1-2: 3 opções (mais fácil)
-    if (level <= 2) return 3;
-    // Níveis 3-5: 4 opções
-    if (level <= 5) return 4;
-    // Níveis 6+: 5 opções (mais difícil)
-    return 5;
-  };
-
   const generateQuestion = () => {
-    const availableShapes = getDifficultyShapes();
-    const numOptions = getNumberOfOptions();
-    
-    if (availableShapes.length < numOptions) return;
-    
-    // Select random shape as correct answer
-    const correctShape = availableShapes[Math.floor(Math.random() * availableShapes.length)];
-    
-    // Get wrong answers
-    const wrongShapes = availableShapes
-      .filter(s => s.id !== correctShape.id)
+    const randomShape = shapes[Math.floor(Math.random() * shapes.length)];
+    setCurrentShape(randomShape);
+
+    // Create 3 options: correct answer + 2 random wrong answers
+    const wrongOptions = shapes
+      .filter(shape => shape.id !== randomShape.id)
       .sort(() => Math.random() - 0.5)
-      .slice(0, numOptions - 1);
-    
-    // Shuffle all options
-    const allOptions = [correctShape, ...wrongShapes].sort(() => Math.random() - 0.5);
-    
-    setCurrentShape(correctShape);
+      .slice(0, 2);
+
+    const allOptions = [randomShape, ...wrongOptions]
+      .sort(() => Math.random() - 0.5);
+
     setOptions(allOptions);
     setSelectedAnswer(null);
     setShowFeedback(false);
@@ -145,10 +115,7 @@ const IdentificationGame: React.FC<IdentificationGameProps> = ({
 
       {/* Answer Options */}
       <div className="w-full max-w-3xl px-4 animate-fade-in-up" style={{ animationDelay: "0.4s" }}>
-        <div className={cn(
-          "grid gap-3 sm:gap-4 md:gap-6 justify-items-center",
-          options.length <= 3 ? "grid-cols-1 sm:grid-cols-3" : options.length === 4 ? "grid-cols-2 sm:grid-cols-4" : "grid-cols-2 sm:grid-cols-5"
-        )}>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 md:gap-6 justify-items-center">
           {options.map((option) => (
             <GameButton
               key={option.id}

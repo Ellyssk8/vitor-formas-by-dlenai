@@ -13,7 +13,6 @@ interface CountingGameProps {
   onErrorAnswer: () => void;
   onNext: () => void;
   className?: string;
-  level?: number;
 }
 
 const CountingGame: React.FC<CountingGameProps> = ({
@@ -22,7 +21,6 @@ const CountingGame: React.FC<CountingGameProps> = ({
   onErrorAnswer,
   onNext,
   className,
-  level = 1,
 }) => {
   const [currentShape, setCurrentShape] = useState<GeometricShape | null>(null);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
@@ -30,39 +28,16 @@ const CountingGame: React.FC<CountingGameProps> = ({
   const [isCorrect, setIsCorrect] = useState(false);
   const [vitorMessage, setVitorMessage] = useState(gameMessages.instructions.counting);
 
-  const getDifficultyShapes = () => {
-    // Excluir estrela pois pode confundir
-    let countableShapes = shapes.filter(s => s.id !== 'star');
-    
-    // Níveis 1-3: Apenas formas de 3-4 lados (6-8 anos)
-    if (level <= 3) {
-      return countableShapes.filter(s => s.sides >= 3 && s.sides <= 4);
-    }
-    // Níveis 4-6: Formas de 3-6 lados (9-10 anos)
-    if (level <= 6) {
-      return countableShapes.filter(s => s.sides >= 3 && s.sides <= 6);
-    }
-    // Níveis 7+: Todas as formas contáveis (11-12 anos)
-    return countableShapes;
-  };
-
-  // Generate number options based on difficulty
-  const getNumberOptions = () => {
-    // Níveis 1-3: 0-6 (mais fácil)
-    if (level <= 3) return Array.from({ length: 7 }, (_, i) => i);
-    // Níveis 4-6: 0-8
-    if (level <= 6) return Array.from({ length: 9 }, (_, i) => i);
-    // Níveis 7+: 0-10 (mais difícil)
-    return Array.from({ length: 11 }, (_, i) => i);
-  };
-  
-  const numberOptions = getNumberOptions();
+  // Number options for counting (3, 4, 5, 6, 8, 0 for circle/oval)
+  const numberOptions = [0, 3, 4, 5, 6, 8];
 
   const generateQuestion = () => {
-    const availableShapes = getDifficultyShapes();
-    if (availableShapes.length === 0) return;
+    // Filter shapes that have sides (exclude shapes without clear side count)
+    const shapesWithSides = shapes.filter(shape => 
+      shape.name !== "Estrela" // Stars are complex
+    );
     
-    const randomShape = availableShapes[Math.floor(Math.random() * availableShapes.length)];
+    const randomShape = shapesWithSides[Math.floor(Math.random() * shapesWithSides.length)];
     setCurrentShape(randomShape);
     setSelectedAnswer(null);
     setShowFeedback(false);
