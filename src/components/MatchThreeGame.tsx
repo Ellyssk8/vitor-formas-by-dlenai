@@ -69,6 +69,26 @@ const MatchThreeGame: React.FC<MatchThreeGameProps> = ({
     return availableShapes[Math.floor(Math.random() * availableShapes.length)];
   }, []);
 
+  // Verifica se criaria um match na posição
+  const wouldCreateMatch = useCallback((
+    currentGrid: GridCell[][],
+    row: number,
+    col: number,
+    shape: GeometricShape
+  ): boolean => {
+    // Verifica horizontal
+    let horizontalCount = 1;
+    if (col >= 1 && currentGrid[row][col - 1]?.shape.id === shape.id) horizontalCount++;
+    if (col >= 2 && currentGrid[row][col - 2]?.shape.id === shape.id) horizontalCount++;
+    
+    // Verifica vertical
+    let verticalCount = 1;
+    if (row >= 1 && currentGrid[row - 1]?.[col]?.shape.id === shape.id) verticalCount++;
+    if (row >= 2 && currentGrid[row - 2]?.[col]?.shape.id === shape.id) verticalCount++;
+    
+    return horizontalCount >= 3 || verticalCount >= 3;
+  }, []);
+
   // Inicializa o grid
   const initializeGrid = useCallback(() => {
     const config = getGameConfig();
@@ -103,27 +123,8 @@ const MatchThreeGame: React.FC<MatchThreeGameProps> = ({
     setScore(0);
     setGameOver(false);
     setMessage("Combine 3 ou mais formas iguais!");
-  }, [getGameConfig, getRandomShape]);
+  }, [getGameConfig, getRandomShape, wouldCreateMatch]);
 
-  // Verifica se criaria um match na posição
-  const wouldCreateMatch = (
-    currentGrid: GridCell[][],
-    row: number,
-    col: number,
-    shape: GeometricShape
-  ): boolean => {
-    // Verifica horizontal
-    let horizontalCount = 1;
-    if (col >= 1 && currentGrid[row][col - 1]?.shape.id === shape.id) horizontalCount++;
-    if (col >= 2 && currentGrid[row][col - 2]?.shape.id === shape.id) horizontalCount++;
-    
-    // Verifica vertical
-    let verticalCount = 1;
-    if (row >= 1 && currentGrid[row - 1]?.[col]?.shape.id === shape.id) verticalCount++;
-    if (row >= 2 && currentGrid[row - 2]?.[col]?.shape.id === shape.id) verticalCount++;
-    
-    return horizontalCount >= 3 || verticalCount >= 3;
-  };
 
   // Encontra todos os matches no grid
   const findMatches = useCallback((currentGrid: GridCell[][]): Set<string> => {
@@ -252,10 +253,16 @@ const MatchThreeGame: React.FC<MatchThreeGameProps> = ({
       row.map(cell => ({ ...cell, isFalling: false }))
     );
     setGrid(currentGrid);
-    
-    // Verifica se há novos matches
-    setTimeout(() => processMatches(), 100);
   }, [grid, findMatches, getRandomShape, getGameConfig, onCorrectAnswer]);
+
+  // Verifica se há novos matches recursivamente
+  useEffect(() => {
+    if (isProcessing) return;
+    const matches = findMatches(grid);
+    if (matches.size > 0 && grid.length > 0) {
+      processMatches();
+    }
+  }, [grid, isProcessing, findMatches, processMatches]);
 
   // Troca duas células
   const swapCells = useCallback(async (
@@ -323,7 +330,8 @@ const MatchThreeGame: React.FC<MatchThreeGameProps> = ({
 
   useEffect(() => {
     initializeGrid();
-  }, [initializeGrid]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [level]);
 
   return (
     <div className={cn("flex flex-col items-center justify-center min-h-screen p-4 space-y-4", className)}>
