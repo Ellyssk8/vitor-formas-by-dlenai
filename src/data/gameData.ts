@@ -122,7 +122,8 @@ export enum GameMode {
   MENU = "menu",
   IDENTIFICATION = "identification", 
   MATCHING = "matching",
-  COUNTING = "counting"
+  COUNTING = "counting",
+  MATCH_THREE = "match_three"
 }
 
 export interface GameState {

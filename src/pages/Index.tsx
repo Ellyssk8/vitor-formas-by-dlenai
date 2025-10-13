@@ -4,6 +4,7 @@ import GameHeader from "@/components/GameHeader";
 import IdentificationGame from "@/components/IdentificationGame";
 import MatchingGame from "@/components/MatchingGame";
 import CountingGame from "@/components/CountingGame";
+import MatchThreeGame from "@/components/MatchThreeGame";
 import { GameMode, geometricShapes } from "@/data/gameData";
 import { useGameAudio } from "@/hooks/useGameAudio";
 import { useToast } from "@/hooks/use-toast";
@@ -96,6 +97,16 @@ const Index = () => {
       case GameMode.MATCHING:
         return (
           <MatchingGame
+            shapes={geometricShapes}
+            onCorrectAnswer={handleCorrectAnswer}
+            onErrorAnswer={playErrorSound}
+            onNext={handleNext}
+            level={level}
+          />
+        );
+      case GameMode.MATCH_THREE:
+        return (
+          <MatchThreeGame
             shapes={geometricShapes}
             onCorrectAnswer={handleCorrectAnswer}
             onErrorAnswer={playErrorSound}
