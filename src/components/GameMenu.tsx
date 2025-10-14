@@ -39,7 +39,7 @@ const GameMenu: React.FC<GameMenuProps> = ({ onSelectMode, className, isMuted, o
   ];
 
   return (
-    <div className={cn("flex flex-col items-center justify-center h-full w-full p-3 sm:p-4 gap-2 sm:gap-3 relative overflow-hidden", className)}>
+    <div className={cn("flex flex-col items-center justify-center h-full w-full p-2 sm:p-3 gap-1 sm:gap-2 relative overflow-hidden", className)}>
       {/* Background Animation */}
       <div 
         className="absolute left-0 right-0 flex items-start justify-center pointer-events-none"
@@ -57,30 +57,30 @@ const GameMenu: React.FC<GameMenuProps> = ({ onSelectMode, className, isMuted, o
         variant="mute"
         size="icon"
         onClick={onToggleMute}
-        className="absolute top-4 right-4 z-20"
+        className="absolute top-2 right-2 z-20"
         aria-label={isMuted ? "Ativar som" : "Desativar som"}
       >
         <img 
           src={isMuted ? soundOff : soundOn}
           alt={isMuted ? "Som desativado" : "Som ativado"}
-          className="w-6 h-6 sm:w-8 sm:h-8"
+          className="w-5 h-5 sm:w-6 sm:h-6"
         />
       </GameButton>
 
       {/* Game Title */}
-      <div className="text-center space-y-1 sm:space-y-2 animate-fade-in-up flex flex-col items-center w-full relative z-10">
+      <div className="text-center space-y-0.5 sm:space-y-1 animate-fade-in-up flex flex-col items-center w-full relative z-10 flex-shrink-0">
         <img 
           src={vitorFormasLogo} 
           alt="Vitor Formas"
-          className="w-full max-w-xs sm:max-w-sm md:max-w-md mx-auto px-4"
+          className="w-full max-w-[200px] sm:max-w-[280px] md:max-w-[320px] mx-auto px-2"
         />
-        <p className="text-base sm:text-xl md:text-2xl text-foreground font-semibold max-w-3xl px-4 uppercase">
+        <p className="text-xs sm:text-base md:text-lg text-foreground font-semibold max-w-3xl px-2 uppercase">
           Aprenda formas geométricas de forma divertida!
         </p>
       </div>
 
       {/* Vitor Character */}
-      <div className="animate-fade-in-up flex justify-center w-full relative z-10" style={{ animationDelay: "0.2s" }}>
+      <div className="animate-fade-in-up flex justify-center w-full relative z-10 flex-shrink-0" style={{ animationDelay: "0.2s" }}>
         <VitorCharacter 
           message="Olá! Vamos aprender formas juntos?"
           animate={true}
@@ -88,12 +88,12 @@ const GameMenu: React.FC<GameMenuProps> = ({ onSelectMode, className, isMuted, o
       </div>
 
       {/* Game Mode Options */}
-      <div className="grid gap-2 sm:gap-3 w-full max-w-md sm:max-w-lg px-4 animate-fade-in-up mx-auto relative z-10" style={{ animationDelay: "0.4s" }}>
+      <div className="grid gap-1.5 sm:gap-2 w-full max-w-md sm:max-w-lg px-2 animate-fade-in-up mx-auto relative z-10 flex-shrink-0" style={{ animationDelay: "0.4s" }}>
         {gameOptions.map((option, index) => (
           <GameButton
             key={option.mode}
             variant="shape"
-            className="h-auto p-2 sm:p-3 hover:bg-accent/10 border-2 hover:border-accent/30 transition-all duration-300 w-full"
+            className="h-auto p-1.5 sm:p-2 hover:bg-accent/10 border-2 hover:border-accent/30 transition-all duration-300 w-full"
             onClick={() => onSelectMode(option.mode)}
             style={{ animationDelay: `${0.6 + index * 0.1}s` }}
           >
@@ -107,11 +107,11 @@ const GameMenu: React.FC<GameMenuProps> = ({ onSelectMode, className, isMuted, o
       </div>
 
       {/* Play Button */}
-      <div className="animate-fade-in-up cursor-pointer flex justify-center w-full relative z-10" style={{ animationDelay: "0.8s" }} onClick={() => onSelectMode(GameMode.IDENTIFICATION)}>
+      <div className="animate-fade-in-up cursor-pointer flex justify-center w-full relative z-10 flex-shrink-0" style={{ animationDelay: "0.8s" }} onClick={() => onSelectMode(GameMode.IDENTIFICATION)}>
         <img 
           src={playButton} 
           alt="Play"
-          className="w-full max-w-[120px] sm:max-w-[140px] hover:scale-105 transition-transform duration-300 animate-pulse-gentle"
+          className="w-full max-w-[80px] sm:max-w-[100px] hover:scale-105 transition-transform duration-300 animate-pulse-gentle"
         />
       </div>
     </div>
