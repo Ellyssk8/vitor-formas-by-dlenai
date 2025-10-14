@@ -20,6 +20,7 @@ export default defineConfig(({ mode }) => ({
   },
   optimizeDeps: {
     include: ['react', 'react-dom'],
+    force: true,
     esbuildOptions: {
       target: 'esnext',
     },
@@ -29,4 +30,5 @@ export default defineConfig(({ mode }) => ({
       include: [/node_modules/],
     },
   },
+  cacheDir: '.vite-clean',
 }));
