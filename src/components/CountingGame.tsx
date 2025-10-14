@@ -83,9 +83,9 @@ const CountingGame: React.FC<CountingGameProps> = ({
   if (!currentShape) return null;
 
   return (
-    <div className={cn("flex flex-col items-center justify-center h-full w-full p-3 sm:p-4 gap-2 sm:gap-3 overflow-hidden", className)}>
+    <div className={cn("flex flex-col items-center justify-center h-full w-full p-2 gap-1.5 overflow-hidden", className)}>
       {/* Vitor with Instructions */}
-      <div className="animate-fade-in-up">
+      <div className="animate-fade-in-up flex-shrink-0">
         <VitorCharacter 
           message={vitorMessage}
           animate={!showFeedback}
@@ -93,14 +93,14 @@ const CountingGame: React.FC<CountingGameProps> = ({
       </div>
 
       {/* Current Shape Display */}
-      <div className="animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
-        <div className="text-center space-y-2">
-          <h2 className="text-base sm:text-lg md:text-xl font-bold text-foreground px-4 uppercase">
+      <div className="animate-fade-in-up flex-shrink-0" style={{ animationDelay: "0.2s" }}>
+        <div className="text-center space-y-1">
+          <h2 className="text-sm sm:text-base md:text-lg font-bold text-foreground px-2 uppercase">
             Quantos lados tem esta forma?
           </h2>
           <ShapeCard
             shape={currentShape}
-            className="mx-auto w-24 h-24 sm:w-32 sm:h-32 md:w-36 md:h-36 text-4xl sm:text-5xl md:text-6xl"
+            className="mx-auto w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 text-3xl sm:text-4xl md:text-5xl"
             animate={!showFeedback}
             showAnswer={showFeedback && isCorrect}
             hideName={true}
@@ -109,13 +109,13 @@ const CountingGame: React.FC<CountingGameProps> = ({
       </div>
 
       {/* Number Options */}
-      <div className="grid grid-cols-3 sm:grid-cols-6 gap-2 sm:gap-3 md:gap-4 w-full max-w-2xl px-4 animate-fade-in-up" style={{ animationDelay: "0.4s" }}>
+      <div className="grid grid-cols-3 sm:grid-cols-6 gap-1.5 sm:gap-2 w-full max-w-2xl px-2 animate-fade-in-up flex-shrink-0" style={{ animationDelay: "0.4s" }}>
         {numberOptions.map((number) => (
           <GameButton
             key={number}
             variant="shape"
             className={cn(
-              "h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16 rounded-full text-base sm:text-lg md:text-xl font-bold transition-all duration-300",
+              "h-10 w-10 sm:h-12 sm:w-12 md:h-14 md:w-14 rounded-full text-sm sm:text-base md:text-lg font-bold transition-all duration-300",
               selectedAnswer === number && (
                 isCorrect ? "ring-4 ring-success bg-success/20" : "ring-4 ring-destructive bg-destructive/20"
               ),
@@ -131,8 +131,8 @@ const CountingGame: React.FC<CountingGameProps> = ({
 
       {/* Explanation for circles */}
       {currentShape && (currentShape.name === "Círculo" || currentShape.name === "Oval") && (
-        <div className="text-center animate-fade-in-up px-4" style={{ animationDelay: "0.6s" }}>
-          <p className="text-xs sm:text-sm text-muted-foreground max-w-md uppercase">
+        <div className="text-center animate-fade-in-up px-2 flex-shrink-0" style={{ animationDelay: "0.6s" }}>
+          <p className="text-xs text-muted-foreground max-w-md uppercase">
             💡 Círculos e ovais não têm lados - eles são redondos!
           </p>
         </div>
@@ -140,7 +140,7 @@ const CountingGame: React.FC<CountingGameProps> = ({
 
       {/* Next Button */}
       {showFeedback && (
-        <div className="animate-fade-in-up">
+        <div className="animate-fade-in-up flex-shrink-0">
           <button
             onClick={handleNext}
             className="animate-gentle-bounce hover:scale-105 transition-transform duration-300"
@@ -148,7 +148,7 @@ const CountingGame: React.FC<CountingGameProps> = ({
             <img 
               src={isCorrect ? proximaFormaBtn : tentarNovamenteBtn} 
               alt={isCorrect ? "Próxima Forma" : "Tentar Novamente"}
-              className="h-auto w-48 sm:w-56"
+              className="h-auto w-36 sm:w-44"
             />
           </button>
         </div>

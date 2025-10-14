@@ -214,9 +214,9 @@ const MatchingGame: React.FC<MatchingGameProps> = ({
   }, [shapes]);
 
   return (
-    <div className={cn("flex flex-col items-center justify-center h-full w-full p-3 sm:p-4 gap-2 sm:gap-3 overflow-hidden", className)}>
+    <div className={cn("flex flex-col items-center justify-center h-full w-full p-2 gap-1.5 overflow-hidden", className)}>
       {/* Vitor with Instructions */}
-      <div className="animate-fade-in-up">
+      <div className="animate-fade-in-up flex-shrink-0">
         <VitorCharacter 
           message={vitorMessage}
           animate={!showCelebration}
@@ -224,8 +224,8 @@ const MatchingGame: React.FC<MatchingGameProps> = ({
       </div>
 
       {/* Instructions */}
-      <div className="text-center animate-fade-in-up px-4" style={{ animationDelay: "0.2s" }}>
-        <h2 className="text-base sm:text-lg md:text-xl font-bold text-foreground uppercase">
+      <div className="text-center animate-fade-in-up px-2 flex-shrink-0" style={{ animationDelay: "0.2s" }}>
+        <h2 className="text-sm sm:text-base md:text-lg font-bold text-foreground uppercase">
           Arraste as formas para seus contornos!
         </h2>
       </div>
@@ -242,7 +242,7 @@ const MatchingGame: React.FC<MatchingGameProps> = ({
       >
         <div className="relative w-full h-full max-w-[90%] md:max-w-[600px] mx-auto flex items-center justify-between px-4 md:px-8">
           {/* Left Column - Draggable Shapes */}
-          <div className="flex flex-col gap-4 md:gap-6">
+          <div className="flex flex-col gap-3 md:gap-4">
             {gameShapes.map((shape, index) => (
               <div
                 key={shape.id}
@@ -279,7 +279,7 @@ const MatchingGame: React.FC<MatchingGameProps> = ({
           </div>
 
           {/* Right Column - Drop Zones */}
-          <div className="flex flex-col gap-4 md:gap-6">
+          <div className="flex flex-col gap-3 md:gap-4">
             {dropZones.map((zone, index) => (
               <div
                 key={zone.id}
@@ -303,20 +303,20 @@ const MatchingGame: React.FC<MatchingGameProps> = ({
 
       {/* Helper Text - Moved outside game area */}
       {gameShapes.length > 0 && matchedPairs === 0 && (
-        <div className="text-center animate-fade-in-up px-4" style={{ animationDelay: "0.6s" }}>
-          <p className="text-xs md:text-sm text-muted-foreground bg-white/80 px-4 py-2 rounded-full inline-block uppercase">
-            👆 Arraste as formas coloridas para os contornos correspondentes
+        <div className="text-center animate-fade-in-up px-2 flex-shrink-0" style={{ animationDelay: "0.6s" }}>
+          <p className="text-xs text-muted-foreground bg-white/80 px-3 py-1 rounded-full inline-block uppercase">
+            👆 Arraste as formas para os contornos
           </p>
         </div>
       )}
 
       {/* Progress Indicator */}
-      <div className="flex space-x-2 animate-fade-in-up" style={{ animationDelay: "0.8s" }}>
+      <div className="flex space-x-2 animate-fade-in-up flex-shrink-0" style={{ animationDelay: "0.8s" }}>
         {Array.from({ length: gameShapes.length }, (_, index) => (
           <div
             key={index}
             className={cn(
-              "w-4 h-4 rounded-full transition-colors duration-300",
+              "w-3 h-3 rounded-full transition-colors duration-300",
               index < matchedPairs ? "bg-success" : "bg-muted"
             )}
           />
@@ -325,7 +325,7 @@ const MatchingGame: React.FC<MatchingGameProps> = ({
 
       {/* Next Button */}
       {showCelebration && (
-        <div className="animate-fade-in-up">
+        <div className="animate-fade-in-up flex-shrink-0">
           <button
             onClick={handleNext}
             className="animate-gentle-bounce hover:scale-105 transition-transform duration-300"
@@ -333,7 +333,7 @@ const MatchingGame: React.FC<MatchingGameProps> = ({
             <img 
               src={proximoDesafioBtn} 
               alt="Próximo Desafio"
-              className="h-auto w-48 sm:w-56"
+              className="h-auto w-36 sm:w-44"
             />
           </button>
         </div>
