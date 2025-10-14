@@ -88,12 +88,12 @@ const GameMenu: React.FC<GameMenuProps> = ({ onSelectMode, className, isMuted, o
       </div>
 
       {/* Game Mode Options */}
-      <div className="grid gap-1.5 sm:gap-2 w-full max-w-md sm:max-w-lg px-2 animate-fade-in-up mx-auto relative z-10 flex-shrink-0" style={{ animationDelay: "0.4s" }}>
+      <div className="grid gap-1 sm:gap-1.5 w-full max-w-sm sm:max-w-md px-2 animate-fade-in-up mx-auto relative z-10 flex-shrink-0" style={{ animationDelay: "0.4s" }}>
         {gameOptions.map((option, index) => (
           <GameButton
             key={option.mode}
             variant="shape"
-            className="h-auto p-1.5 sm:p-2 hover:bg-accent/10 border-2 hover:border-accent/30 transition-all duration-300 w-full"
+            className="h-auto p-1 sm:p-1.5 hover:bg-accent/10 border-2 hover:border-accent/30 transition-all duration-300 w-full"
             onClick={() => onSelectMode(option.mode)}
             style={{ animationDelay: `${0.6 + index * 0.1}s` }}
           >
@@ -111,7 +111,7 @@ const GameMenu: React.FC<GameMenuProps> = ({ onSelectMode, className, isMuted, o
         <img 
           src={playButton} 
           alt="Play"
-          className="w-full max-w-[80px] sm:max-w-[100px] hover:scale-105 transition-transform duration-300 animate-pulse-gentle"
+          className="w-full max-w-[100px] sm:max-w-[130px] hover:scale-105 transition-transform duration-300 animate-pulse-gentle"
         />
       </div>
     </div>
