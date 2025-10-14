@@ -68,13 +68,13 @@ const GameMenu: React.FC<GameMenuProps> = ({ onSelectMode, className, isMuted, o
       </GameButton>
 
       {/* Game Title */}
-      <div className="text-center space-y-0.5 sm:space-y-1 animate-fade-in-up flex flex-col items-center w-full relative z-10 flex-shrink-0">
+      <div className="text-center space-y-0.5 animate-fade-in-up flex flex-col items-center w-full relative z-10 flex-shrink-0">
         <img 
           src={vitorFormasLogo} 
           alt="Vitor Formas"
-          className="w-full max-w-[180px] sm:max-w-[240px] md:max-w-[280px] mx-auto px-2"
+          className="w-full max-w-[150px] sm:max-w-[200px] md:max-w-[240px] mx-auto px-2"
         />
-        <p className="text-[10px] sm:text-sm md:text-base text-foreground font-semibold max-w-3xl px-2 uppercase">
+        <p className="text-[9px] sm:text-xs md:text-sm text-foreground font-semibold max-w-3xl px-2 uppercase">
           Aprenda formas geométricas de forma divertida!
         </p>
       </div>
@@ -88,7 +88,7 @@ const GameMenu: React.FC<GameMenuProps> = ({ onSelectMode, className, isMuted, o
       </div>
 
       {/* Game Mode Options */}
-      <div className="grid gap-0.5 sm:gap-1 w-full max-w-[280px] sm:max-w-[340px] px-2 animate-fade-in-up mx-auto relative z-10 flex-shrink-0" style={{ animationDelay: "0.4s" }}>
+      <div className="grid gap-0.5 sm:gap-1 w-full max-w-[260px] sm:max-w-[320px] px-2 animate-fade-in-up mx-auto relative z-10 flex-shrink-0" style={{ animationDelay: "0.4s" }}>
         {gameOptions.map((option, index) => (
           <GameButton
             key={option.mode}
@@ -111,7 +111,7 @@ const GameMenu: React.FC<GameMenuProps> = ({ onSelectMode, className, isMuted, o
         <img 
           src={playButton} 
           alt="Play"
-          className="w-full max-w-[140px] sm:max-w-[180px] hover:scale-105 transition-transform duration-300 animate-pulse-gentle"
+          className="w-full max-w-[120px] sm:max-w-[160px] hover:scale-105 transition-transform duration-300 animate-pulse-gentle"
         />
       </div>
     </div>
