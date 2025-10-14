@@ -32,7 +32,7 @@ const ShapeVisual: React.FC<ShapeVisualProps> = ({
     sm: "w-20 h-20",
     md: "w-28 h-28",
     lg: "w-40 h-40",
-    xl: "w-56 h-56",
+    xl: "w-72 h-72",
   };
 
   // Map shape IDs to imported images

@@ -49,7 +49,7 @@ const ShapeCard: React.FC<ShapeCardProps> = ({
     <div
       onClick={onClick}
       className={cn(
-        "relative flex flex-col items-center justify-center p-6 rounded-2xl cursor-pointer transition-all duration-300 shadow-shape hover:shadow-lg",
+        "relative flex flex-col items-center justify-center p-2 rounded-2xl cursor-pointer transition-all duration-300 shadow-shape hover:shadow-lg overflow-hidden",
         !hideName && bgColor,
         isSelected && "ring-4 ring-accent scale-105",
         showAnswer && "animate-celebration",
@@ -59,12 +59,12 @@ const ShapeCard: React.FC<ShapeCardProps> = ({
       )}
     >
       {/* Shape Visual */}
-      <div className="mb-4 drop-shadow-lg flex items-center justify-center flex-1">
+      <div className="drop-shadow-lg flex items-center justify-center w-full h-full">
         <ShapeVisual 
           shapeId={shape.id} 
           color={shape.color} 
           size={size || "lg"}
-          className="filter drop-shadow-md"
+          className="filter drop-shadow-md max-w-full max-h-full"
         />
       </div>
       
