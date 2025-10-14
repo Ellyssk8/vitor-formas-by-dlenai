@@ -14,11 +14,11 @@ const VitorCharacter: React.FC<VitorCharacterProps> = ({
   animate = true,
 }) => {
   return (
-    <div className={cn("flex flex-col items-center space-y-2 sm:space-y-3", className)}>
+    <div className={cn("flex flex-col items-center space-y-1 sm:space-y-2", className)}>
       {/* Vitor Character Image */}
       <div 
         className={cn(
-          "relative w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 rounded-full overflow-hidden bg-white shadow-game border-2 sm:border-4 border-accent",
+          "relative w-20 h-20 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full overflow-hidden bg-white shadow-game border-2 sm:border-3 border-accent",
           animate && "animate-gentle-bounce"
         )}
       >
@@ -36,8 +36,8 @@ const VitorCharacter: React.FC<VitorCharacterProps> = ({
           <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-b-4 border-transparent border-b-white" />
           
           {/* Speech bubble content */}
-          <div className="bg-white rounded-2xl px-3 py-2 sm:px-4 sm:py-3 shadow-shape border-2 border-accent/20">
-            <p className="text-center text-foreground font-medium text-xs sm:text-sm md:text-base leading-snug">
+          <div className="bg-white rounded-2xl px-2 py-1.5 sm:px-3 sm:py-2 shadow-shape border-2 border-accent/20">
+            <p className="text-center text-foreground font-medium text-[10px] sm:text-xs md:text-sm leading-snug">
               {message}
             </p>
           </div>
