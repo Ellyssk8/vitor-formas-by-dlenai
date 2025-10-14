@@ -39,16 +39,16 @@ const GameMenu: React.FC<GameMenuProps> = ({ onSelectMode, className, isMuted, o
   ];
 
   return (
-    <div className={cn("flex flex-col items-center justify-between h-screen overflow-hidden p-2 sm:p-3 relative", className)}>
+    <div className={cn("flex flex-col items-center justify-center min-h-screen p-4 sm:p-6 md:p-8 space-y-6 sm:space-y-8 relative", className)}>
       {/* Background Animation */}
       <div 
         className="absolute left-0 right-0 flex items-start justify-center pointer-events-none"
-        style={{ zIndex: 0, top: '15%' }}
+        style={{ zIndex: 0, top: '20%' }}
       >
         <img 
           src={backgroundAnimation}
           alt=""
-          className="w-full max-w-2xl h-auto object-contain opacity-80"
+          className="w-full max-w-4xl h-auto object-contain"
         />
       </div>
 
@@ -57,64 +57,61 @@ const GameMenu: React.FC<GameMenuProps> = ({ onSelectMode, className, isMuted, o
         variant="mute"
         size="icon"
         onClick={onToggleMute}
-        className="absolute top-2 right-2 z-20 w-8 h-8 sm:w-10 sm:h-10"
+        className="absolute top-4 right-4 z-20"
         aria-label={isMuted ? "Ativar som" : "Desativar som"}
       >
         <img 
           src={isMuted ? soundOff : soundOn}
           alt={isMuted ? "Som desativado" : "Som ativado"}
-          className="w-4 h-4 sm:w-5 sm:h-5"
+          className="w-6 h-6 sm:w-8 sm:h-8"
         />
       </GameButton>
 
-      {/* Top Section: Title */}
-      <div className="text-center space-y-1 animate-fade-in-up flex flex-col items-center w-full relative z-10 pt-2">
+      {/* Game Title */}
+      <div className="text-center space-y-3 sm:space-y-5 animate-fade-in-up flex flex-col items-center w-full relative z-10">
         <img 
           src={vitorFormasLogo} 
           alt="Vitor Formas"
-          className="w-full max-w-[180px] sm:max-w-[240px] md:max-w-[280px] mx-auto px-2"
+          className="w-full max-w-sm sm:max-w-md md:max-w-lg mx-auto mb-2 px-4"
         />
-        <p className="text-xs sm:text-sm md:text-base text-foreground font-semibold max-w-2xl px-2 uppercase">
+        <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-foreground font-semibold max-w-3xl px-4 uppercase">
           Aprenda formas geométricas de forma divertida!
         </p>
       </div>
 
-      {/* Middle Section: Character + Options */}
-      <div className="flex flex-col items-center w-full relative z-10 space-y-2 flex-shrink">
-        {/* Vitor Character */}
-        <div className="animate-fade-in-up flex justify-center" style={{ animationDelay: "0.2s" }}>
-          <VitorCharacter 
-            message="Olá! Vamos aprender formas juntos?"
-            animate={true}
-          />
-        </div>
-
-        {/* Game Mode Options */}
-        <div className="grid gap-1.5 sm:gap-2 w-full max-w-[280px] sm:max-w-xs px-2 animate-fade-in-up" style={{ animationDelay: "0.4s" }}>
-          {gameOptions.map((option, index) => (
-            <GameButton
-              key={option.mode}
-              variant="shape"
-              className="h-auto p-1 sm:p-1.5 hover:bg-accent/10 border-2 hover:border-accent/30 transition-all duration-300 w-full"
-              onClick={() => onSelectMode(option.mode)}
-              style={{ animationDelay: `${0.6 + index * 0.1}s` }}
-            >
-              <img 
-                src={option.image} 
-                alt={option.alt}
-                className="w-full h-auto"
-              />
-            </GameButton>
-          ))}
-        </div>
+      {/* Vitor Character */}
+      <div className="animate-fade-in-up flex justify-center w-full relative z-10" style={{ animationDelay: "0.2s" }}>
+        <VitorCharacter 
+          message="Olá! Vamos aprender formas juntos?"
+          animate={true}
+        />
       </div>
 
-      {/* Bottom Section: Play Button */}
-      <div className="animate-fade-in-up cursor-pointer flex justify-center w-full relative z-10 pb-2" style={{ animationDelay: "0.8s" }} onClick={() => onSelectMode(GameMode.IDENTIFICATION)}>
+      {/* Game Mode Options */}
+      <div className="grid gap-4 sm:gap-6 w-full max-w-lg sm:max-w-xl px-4 animate-fade-in-up mx-auto relative z-10" style={{ animationDelay: "0.4s" }}>
+        {gameOptions.map((option, index) => (
+          <GameButton
+            key={option.mode}
+            variant="shape"
+            className="h-auto p-3 sm:p-4 hover:bg-accent/10 border-2 hover:border-accent/30 transition-all duration-300 w-full"
+            onClick={() => onSelectMode(option.mode)}
+            style={{ animationDelay: `${0.6 + index * 0.1}s` }}
+          >
+            <img 
+              src={option.image} 
+              alt={option.alt}
+              className="w-full h-auto"
+            />
+          </GameButton>
+        ))}
+      </div>
+
+      {/* Play Button */}
+      <div className="animate-fade-in-up cursor-pointer flex justify-center w-full relative z-10" style={{ animationDelay: "0.8s" }} onClick={() => onSelectMode(GameMode.IDENTIFICATION)}>
         <img 
           src={playButton} 
           alt="Play"
-          className="w-full max-w-[120px] sm:max-w-[140px] hover:scale-105 transition-transform duration-300 animate-pulse-gentle"
+          className="w-full max-w-[160px] sm:max-w-[180px] hover:scale-105 transition-transform duration-300 animate-pulse-gentle"
         />
       </div>
     </div>

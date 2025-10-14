@@ -14,11 +14,11 @@ const VitorCharacter: React.FC<VitorCharacterProps> = ({
   animate = true,
 }) => {
   return (
-    <div className={cn("flex flex-col items-center space-y-1.5", className)}>
+    <div className={cn("flex flex-col items-center space-y-4", className)}>
       {/* Vitor Character Image */}
       <div 
         className={cn(
-          "relative w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full overflow-hidden bg-white shadow-game border-2 border-accent",
+          "relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 rounded-full overflow-hidden bg-white shadow-game border-4 border-accent",
           animate && "animate-gentle-bounce"
         )}
       >
@@ -33,11 +33,11 @@ const VitorCharacter: React.FC<VitorCharacterProps> = ({
       {message && (
         <div className="relative max-w-xs">
           {/* Speech bubble triangle */}
-          <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-2 border-r-2 border-b-2 border-transparent border-b-white" />
+          <div className="absolute -top-2 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-b-4 border-transparent border-b-white" />
           
           {/* Speech bubble content */}
-          <div className="bg-white rounded-lg px-2.5 py-1.5 shadow-shape border border-accent/20">
-            <p className="text-center text-foreground font-medium text-[10px] sm:text-xs leading-tight">
+          <div className="bg-white rounded-2xl px-6 py-4 shadow-shape border-2 border-accent/20">
+            <p className="text-center text-foreground font-medium text-lg leading-relaxed">
               {message}
             </p>
           </div>
