@@ -72,7 +72,7 @@ const GameMenu: React.FC<GameMenuProps> = ({ onSelectMode, className, isMuted, o
         <img 
           src={vitorFormasLogo} 
           alt="Vitor Formas"
-          className="w-full max-w-[160px] sm:max-w-[220px] md:max-w-[260px] mx-auto px-2"
+          className="w-full max-w-[180px] sm:max-w-[240px] md:max-w-[280px] mx-auto px-2"
         />
         <p className="text-[10px] sm:text-sm md:text-base text-foreground font-semibold max-w-3xl px-2 uppercase">
           Aprenda formas geométricas de forma divertida!
