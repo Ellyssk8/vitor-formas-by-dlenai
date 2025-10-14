@@ -240,14 +240,35 @@ const MatchingGame: React.FC<MatchingGameProps> = ({
         onTouchMove={handleTouchMove}
         onTouchEnd={handleMouseUp}
       >
-        <div className="relative w-full h-full max-w-[90%] md:max-w-[600px] mx-auto flex items-center justify-between px-4 md:px-8">
-          {/* Left Column - Draggable Shapes */}
-          <div className="flex flex-col gap-3 md:gap-4">
+        <div className="relative w-full h-full max-w-[95%] mx-auto flex flex-col items-center justify-center gap-4 md:gap-6 py-4">
+          {/* Top Row - Drop Zones (Horizontal) */}
+          <div className="flex gap-2 md:gap-4 justify-center">
+            {dropZones.map((zone, index) => (
+              <div
+                key={zone.id}
+                data-drop-zone={zone.id}
+                className={cn(
+                  "w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 border-4 border-dashed rounded-2xl flex items-center justify-center transition-all duration-300",
+                  zone.isOccupied 
+                    ? "border-success bg-success/10" 
+                    : "border-muted-foreground/50 bg-muted/30",
+                  "hover:border-accent hover:bg-accent/10"
+                )}
+              >
+                {!zone.isOccupied && (
+                  <span className="text-xl sm:text-2xl md:text-3xl opacity-40">{zone.shape.emoji}</span>
+                )}
+              </div>
+            ))}
+          </div>
+
+          {/* Bottom Row - Draggable Shapes (Horizontal) */}
+          <div className="flex gap-2 md:gap-4 justify-center">
             {gameShapes.map((shape, index) => (
               <div
                 key={shape.id}
                 className={cn(
-                  "w-20 h-20 md:w-24 md:h-24 cursor-grab active:cursor-grabbing transition-transform duration-200 select-none",
+                  "w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 cursor-grab active:cursor-grabbing transition-transform duration-200 select-none",
                   shape.isDragging && "scale-110 z-10 rotate-3 fixed",
                   shape.isMatched && "cursor-default animate-celebration opacity-50"
                 )}
@@ -274,27 +295,6 @@ const MatchingGame: React.FC<MatchingGameProps> = ({
                   hideName={true}
                   size="xl"
                 />
-              </div>
-            ))}
-          </div>
-
-          {/* Right Column - Drop Zones */}
-          <div className="flex flex-col gap-3 md:gap-4">
-            {dropZones.map((zone, index) => (
-              <div
-                key={zone.id}
-                data-drop-zone={zone.id}
-                className={cn(
-                  "w-20 h-20 md:w-24 md:h-24 border-4 border-dashed rounded-2xl flex items-center justify-center transition-all duration-300",
-                  zone.isOccupied 
-                    ? "border-success bg-success/10" 
-                    : "border-muted-foreground/50 bg-muted/30",
-                  "hover:border-accent hover:bg-accent/10"
-                )}
-              >
-                {!zone.isOccupied && (
-                  <span className="text-2xl md:text-3xl opacity-40">{zone.shape.emoji}</span>
-                )}
               </div>
             ))}
           </div>

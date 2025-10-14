@@ -72,9 +72,9 @@ const GameMenu: React.FC<GameMenuProps> = ({ onSelectMode, className, isMuted, o
         <img 
           src={vitorFormasLogo} 
           alt="Vitor Formas"
-          className="w-full max-w-[200px] sm:max-w-[280px] md:max-w-[320px] mx-auto px-2"
+          className="w-full max-w-[160px] sm:max-w-[220px] md:max-w-[260px] mx-auto px-2"
         />
-        <p className="text-xs sm:text-base md:text-lg text-foreground font-semibold max-w-3xl px-2 uppercase">
+        <p className="text-[10px] sm:text-sm md:text-base text-foreground font-semibold max-w-3xl px-2 uppercase">
           Aprenda formas geométricas de forma divertida!
         </p>
       </div>
@@ -88,12 +88,12 @@ const GameMenu: React.FC<GameMenuProps> = ({ onSelectMode, className, isMuted, o
       </div>
 
       {/* Game Mode Options */}
-      <div className="grid gap-1 sm:gap-1.5 w-full max-w-sm sm:max-w-md px-2 animate-fade-in-up mx-auto relative z-10 flex-shrink-0" style={{ animationDelay: "0.4s" }}>
+      <div className="grid gap-0.5 sm:gap-1 w-full max-w-[280px] sm:max-w-[340px] px-2 animate-fade-in-up mx-auto relative z-10 flex-shrink-0" style={{ animationDelay: "0.4s" }}>
         {gameOptions.map((option, index) => (
           <GameButton
             key={option.mode}
             variant="shape"
-            className="h-auto p-1 sm:p-1.5 hover:bg-accent/10 border-2 hover:border-accent/30 transition-all duration-300 w-full"
+            className="h-auto p-0.5 sm:p-1 hover:bg-accent/10 border-2 hover:border-accent/30 transition-all duration-300 w-full"
             onClick={() => onSelectMode(option.mode)}
             style={{ animationDelay: `${0.6 + index * 0.1}s` }}
           >
@@ -111,7 +111,7 @@ const GameMenu: React.FC<GameMenuProps> = ({ onSelectMode, className, isMuted, o
         <img 
           src={playButton} 
           alt="Play"
-          className="w-full max-w-[120px] sm:max-w-[150px] hover:scale-105 transition-transform duration-300 animate-pulse-gentle"
+          className="w-full max-w-[140px] sm:max-w-[180px] hover:scale-105 transition-transform duration-300 animate-pulse-gentle"
         />
       </div>
     </div>
