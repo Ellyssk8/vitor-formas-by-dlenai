@@ -1,7 +1,7 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'app.lovable.0bced8213d694c5f89773e8cb36cdc4c',
+  appId: 'com.dlenai.vitorformas',
   appName: 'Vitor Forms',
   webDir: 'dist',
   server: {
