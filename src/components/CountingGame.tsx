@@ -83,7 +83,7 @@ const CountingGame: React.FC<CountingGameProps> = ({
   if (!currentShape) return null;
 
   return (
-    <div className={cn("flex flex-col items-center justify-center h-full p-3 sm:p-4 space-y-2 sm:space-y-3 overflow-hidden", className)}>
+    <div className={cn("flex flex-col items-center justify-center h-full w-full p-3 sm:p-4 gap-2 sm:gap-3 overflow-hidden", className)}>
       {/* Vitor with Instructions */}
       <div className="animate-fade-in-up">
         <VitorCharacter 

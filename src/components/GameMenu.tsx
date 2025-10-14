@@ -39,7 +39,7 @@ const GameMenu: React.FC<GameMenuProps> = ({ onSelectMode, className, isMuted, o
   ];
 
   return (
-    <div className={cn("flex flex-col items-center justify-center h-full p-3 sm:p-4 space-y-3 sm:space-y-4 relative overflow-hidden", className)}>
+    <div className={cn("flex flex-col items-center justify-center h-full w-full p-3 sm:p-4 gap-2 sm:gap-3 relative overflow-hidden", className)}>
       {/* Background Animation */}
       <div 
         className="absolute left-0 right-0 flex items-start justify-center pointer-events-none"

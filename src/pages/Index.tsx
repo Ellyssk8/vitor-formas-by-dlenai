@@ -99,7 +99,7 @@ const Index = () => {
   };
 
   return (
-    <div className="h-dvh overflow-hidden bg-gradient-to-br from-background via-muted/30 to-accent/10 flex flex-col">
+    <div className="h-full w-full overflow-hidden bg-gradient-to-br from-background via-muted/30 to-accent/10 flex flex-col">
       {currentMode !== GameMode.MENU && (
         <GameHeader
           score={score}
@@ -110,7 +110,7 @@ const Index = () => {
         />
       )}
       
-      <main className="flex-1 overflow-hidden">
+      <main className="flex-1 min-h-0 overflow-hidden">
         {renderGame()}
       </main>
     </div>
