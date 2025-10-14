@@ -9,6 +9,11 @@ const config: CapacitorConfig = {
       keystorePath: undefined,
       keystoreAlias: undefined,
     }
+  },
+  plugins: {
+    SplashScreen: {
+      launchAutoHide: true,
+    }
   }
 };
 
