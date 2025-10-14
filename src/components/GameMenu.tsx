@@ -111,7 +111,7 @@ const GameMenu: React.FC<GameMenuProps> = ({ onSelectMode, className, isMuted, o
         <img 
           src={playButton} 
           alt="Play"
-          className="w-full max-w-[100px] sm:max-w-[130px] hover:scale-105 transition-transform duration-300 animate-pulse-gentle"
+          className="w-full max-w-[120px] sm:max-w-[150px] hover:scale-105 transition-transform duration-300 animate-pulse-gentle"
         />
       </div>
     </div>
