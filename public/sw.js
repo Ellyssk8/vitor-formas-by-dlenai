@@ -1,6 +1,5 @@
-const CACHE_NAME = 'vitor-forms-v4';
+const CACHE_NAME = 'vitor-forms-v5';
 const urlsToCache = [
-  '/',
   '/manifest.json',
   '/icon-192.png',
   '/icon-512.png',
@@ -19,28 +18,34 @@ self.addEventListener('install', (event) => {
   self.skipWaiting();
 });
 
-// Fetch event - serve cached content when offline
+// Fetch event - network first, cache fallback
 self.addEventListener('fetch', (event) => {
   event.respondWith(
-    caches.match(event.request)
+    fetch(event.request)
       .then((response) => {
-        if (response) {
+        // Não cachear requisições não-GET ou de outras origens
+        if (event.request.method !== 'GET' || !response || response.status !== 200) {
           return response;
         }
-        return fetch(event.request).then((response) => {
-          // Não cachear requisições não-GET ou de outras origens
-          if (event.request.method !== 'GET' || !response || response.status !== 200) {
-            return response;
-          }
-          
-          // Cachear a resposta
+        
+        // Só cachear assets estáticos, não HTML/JS/CSS principais
+        const url = new URL(event.request.url);
+        if (url.pathname.match(/\.(png|jpg|jpeg|svg|gif|webp|ico)$/)) {
           const responseToCache = response.clone();
           caches.open(CACHE_NAME).then((cache) => {
             cache.put(event.request, responseToCache);
           });
-          return response;
-        }).catch(() => {
-          // Se falhar e for uma navegação, retorna a página principal do cache
+        }
+        
+        return response;
+      })
+      .catch(() => {
+        // Se falhar, tenta o cache
+        return caches.match(event.request).then((response) => {
+          if (response) {
+            return response;
+          }
+          // Se for navegação e não houver cache, retorna offline page
           if (event.request.mode === 'navigate') {
             return caches.match('/');
           }
