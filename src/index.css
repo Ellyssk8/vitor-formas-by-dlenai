@@ -128,6 +128,13 @@ All colors MUST be HSL for accessibility and design consistency.
 @layer base {
   * {
     @apply border-border;
+    box-sizing: border-box;
+  }
+
+  html {
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
   }
 
   html, body {
@@ -135,14 +142,20 @@ All colors MUST be HSL for accessibility and design consistency.
     margin: 0;
     padding: 0;
     overflow: hidden;
-    height: 100%;
-    width: 100%;
+    height: 100vh;
+    width: 100vw;
     position: fixed;
+    overscroll-behavior: none;
   }
 
   #root {
-    height: 100%;
-    width: 100%;
+    height: 100vh;
+    width: 100vw;
     overflow: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
   }
 }
