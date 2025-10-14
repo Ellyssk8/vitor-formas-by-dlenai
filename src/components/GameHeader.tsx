@@ -24,13 +24,13 @@ const GameHeader: React.FC<GameHeaderProps> = ({
   className,
 }) => {
   return (
-    <header className={cn("flex items-center justify-between gap-2 p-2 sm:p-3 md:p-4 bg-white/80 backdrop-blur-sm border-b border-border", className)}>
+    <header className={cn("flex items-center justify-between gap-2 p-1.5 sm:p-2 bg-white/80 backdrop-blur-sm border-b border-border shrink-0", className)}>
       {/* Left side - Home button */}
       <GameButton
         variant="ghost"
         size="icon"
         onClick={onGoHome}
-        className="hover:bg-accent/20 shrink-0 p-1 h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12"
+        className="hover:bg-accent/20 shrink-0 p-1 h-7 w-7 sm:h-8 sm:w-8 md:h-10 md:w-10"
       >
         <img src={homeIcon} alt="Home" className="h-full w-full object-contain" />
       </GameButton>
@@ -40,29 +40,29 @@ const GameHeader: React.FC<GameHeaderProps> = ({
         <img 
           src={vitorFormasLogo} 
           alt="Vitor Formas"
-          className="h-8 sm:h-10 md:h-12 w-auto object-contain"
+          className="h-6 sm:h-8 md:h-10 w-auto object-contain"
         />
       </div>
 
       {/* Right side - Score and Sound */}
-      <div className="flex items-center gap-1 sm:gap-2 md:gap-3">
+      <div className="flex items-center gap-1 sm:gap-1.5 md:gap-2">
         {/* Score Display */}
-        <div className="flex items-center gap-1 sm:gap-1.5 bg-accent/10 rounded-full px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2">
-          <span className="text-xs sm:text-sm md:text-base font-medium text-foreground">⭐</span>
-          <span className="text-xs sm:text-sm md:text-base font-bold text-foreground">{score}</span>
+        <div className="flex items-center gap-0.5 sm:gap-1 bg-accent/10 rounded-full px-1.5 sm:px-2 md:px-3 py-0.5 sm:py-1">
+          <span className="text-xs sm:text-sm font-medium text-foreground">⭐</span>
+          <span className="text-xs sm:text-sm font-bold text-foreground">{score}</span>
         </div>
 
         {/* Level Display - Hidden on mobile */}
-        <div className="hidden sm:flex items-center gap-1.5 md:gap-2 bg-primary/10 rounded-full px-3 md:px-4 py-1.5 md:py-2">
-          <span className="text-xs sm:text-sm md:text-base font-medium text-primary uppercase">Nível</span>
-          <span className="text-xs sm:text-sm md:text-base font-bold text-primary">{level}</span>
+        <div className="hidden sm:flex items-center gap-1 md:gap-1.5 bg-primary/10 rounded-full px-2 md:px-3 py-1">
+          <span className="text-xs sm:text-sm font-medium text-primary uppercase">Nível</span>
+          <span className="text-xs sm:text-sm font-bold text-primary">{level}</span>
         </div>
 
         {/* Mute Button */}
         <GameButton
           variant="mute"
           onClick={onToggleMute}
-          className="transition-colors duration-200 shrink-0 h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 p-1.5"
+          className="transition-colors duration-200 shrink-0 h-7 w-7 sm:h-8 sm:w-8 md:h-10 md:w-10 p-1"
         >
           <img 
             src={isMuted ? soundOffIcon : soundOnIcon} 

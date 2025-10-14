@@ -214,7 +214,7 @@ const MatchingGame: React.FC<MatchingGameProps> = ({
   }, [shapes]);
 
   return (
-    <div className={cn("flex flex-col items-center justify-start min-h-screen p-4 md:p-8 space-y-4 md:space-y-6 overflow-y-auto", className)}>
+    <div className={cn("flex flex-col items-center justify-center h-full p-3 sm:p-4 space-y-2 sm:space-y-3 overflow-hidden", className)}>
       {/* Vitor with Instructions */}
       <div className="animate-fade-in-up">
         <VitorCharacter 
@@ -225,7 +225,7 @@ const MatchingGame: React.FC<MatchingGameProps> = ({
 
       {/* Instructions */}
       <div className="text-center animate-fade-in-up px-4" style={{ animationDelay: "0.2s" }}>
-        <h2 className="text-lg md:text-2xl font-bold text-foreground mb-2 uppercase">
+        <h2 className="text-base sm:text-lg md:text-xl font-bold text-foreground uppercase">
           Arraste as formas para seus contornos!
         </h2>
       </div>
@@ -233,7 +233,7 @@ const MatchingGame: React.FC<MatchingGameProps> = ({
       {/* Game Area */}
       <div 
         ref={gameAreaRef}
-        className="relative w-full max-w-4xl h-[450px] md:h-[550px] bg-white/50 rounded-3xl border-2 border-dashed border-accent/30 overflow-hidden animate-fade-in-up flex items-center justify-center"
+        className="relative w-full max-w-4xl flex-1 min-h-0 bg-white/50 rounded-3xl border-2 border-dashed border-accent/30 overflow-hidden animate-fade-in-up flex items-center justify-center"
         style={{ animationDelay: "0.4s" }}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
@@ -332,7 +332,7 @@ const MatchingGame: React.FC<MatchingGameProps> = ({
             <img 
               src={proximoDesafioBtn} 
               alt="Próximo Desafio"
-              className="h-auto w-64 sm:w-72"
+              className="h-auto w-48 sm:w-56"
             />
           </button>
         </div>
