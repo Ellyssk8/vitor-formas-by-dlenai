@@ -6,7 +6,6 @@ import MatchingGame from "@/components/MatchingGame";
 import CountingGame from "@/components/CountingGame";
 import { GameMode, geometricShapes } from "@/data/gameData";
 import { useGameAudio } from "@/hooks/useGameAudio";
-import { useToast } from "@/hooks/use-toast";
 
 const Index = () => {
   const [currentMode, setCurrentMode] = useState<GameMode>(GameMode.MENU);
@@ -24,8 +23,6 @@ const Index = () => {
     playMenuMusic,
     stopMenuMusic,
   } = useGameAudio();
-  
-  const { toast } = useToast();
 
   // Play menu music when on menu
   useEffect(() => {
@@ -46,11 +43,6 @@ const Index = () => {
   const handleCorrectAnswer = () => {
     playSuccessSound();
     setScore(prev => prev + 10);
-    toast({
-      title: "MUITO BEM! 🎉",
-      description: "+10 PONTOS",
-      duration: 2000,
-    });
   };
 
   const handleNext = () => {
@@ -58,11 +50,6 @@ const Index = () => {
     // Level up every 5 correct answers
     if (score > 0 && score % 50 === 0) {
       setLevel(prev => prev + 1);
-      toast({
-        title: "NÍVEL AUMENTOU! 🚀",
-        description: `VOCÊ CHEGOU AO NÍVEL ${level + 1}!`,
-        duration: 3000,
-      });
     }
   };
 
