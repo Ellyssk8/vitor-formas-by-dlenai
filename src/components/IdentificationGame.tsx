@@ -87,9 +87,9 @@ const IdentificationGame: React.FC<IdentificationGameProps> = ({
   if (!currentShape) return null;
 
   return (
-    <div className={cn("flex flex-col items-center justify-center min-h-screen p-4 sm:p-6 md:p-8 space-y-4 sm:space-y-6 md:space-y-8", className)}>
+    <div className={cn("flex flex-col items-center justify-between h-screen overflow-hidden p-2 sm:p-3 space-y-2", className)}>
       {/* Vitor with Instructions */}
-      <div className="animate-fade-in-up">
+      <div className="animate-fade-in-up flex-shrink-0">
         <VitorCharacter 
           message={vitorMessage}
           animate={!showFeedback}
@@ -97,15 +97,15 @@ const IdentificationGame: React.FC<IdentificationGameProps> = ({
       </div>
 
       {/* Current Shape Display */}
-      <div className="animate-fade-in-up w-full max-w-3xl" style={{ animationDelay: "0.2s" }}>
-        <div className="flex flex-col items-center space-y-4">
-          <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-foreground mb-4 sm:mb-6 px-4 text-center uppercase">
+      <div className="animate-fade-in-up w-full max-w-2xl flex-shrink" style={{ animationDelay: "0.2s" }}>
+        <div className="flex flex-col items-center space-y-2">
+          <h2 className="text-sm sm:text-base md:text-lg font-bold text-foreground px-2 text-center uppercase">
             Qual é o nome desta forma?
           </h2>
           <div className="flex justify-center w-full">
             <ShapeCard
               shape={currentShape}
-              className="w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 text-5xl sm:text-6xl md:text-8xl"
+              className="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 text-4xl sm:text-5xl md:text-6xl"
               animate={!showFeedback}
               hideName={true}
             />
@@ -114,8 +114,8 @@ const IdentificationGame: React.FC<IdentificationGameProps> = ({
       </div>
 
       {/* Answer Options */}
-      <div className="w-full max-w-3xl px-4 animate-fade-in-up" style={{ animationDelay: "0.4s" }}>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 md:gap-6 justify-items-center">
+      <div className="w-full max-w-2xl px-2 animate-fade-in-up flex-shrink" style={{ animationDelay: "0.4s" }}>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 justify-items-center">
           {options.map((option) => (
             <GameButton
               key={option.id}
@@ -123,7 +123,7 @@ const IdentificationGame: React.FC<IdentificationGameProps> = ({
               size="shape-answer"
               onClick={() => handleAnswerSelect(option.id)}
               className={cn(
-                "transition-all duration-300 h-20 sm:h-24 w-full",
+                "transition-all duration-300 h-16 sm:h-18 w-full",
                 selectedAnswer === option.id && (
                   isCorrect ? "ring-4 ring-success bg-success/20" : "ring-4 ring-destructive bg-destructive/20"
                 ),
@@ -131,9 +131,9 @@ const IdentificationGame: React.FC<IdentificationGameProps> = ({
               )}
               disabled={showFeedback}
             >
-              <div className="flex flex-col items-center justify-center space-y-1 sm:space-y-2">
-                <span className="text-xl sm:text-2xl">{option.emoji}</span>
-                <span className="font-semibold text-sm sm:text-base uppercase">{option.name}</span>
+              <div className="flex flex-col items-center justify-center space-y-1">
+                <span className="text-lg sm:text-xl">{option.emoji}</span>
+                <span className="font-semibold text-xs sm:text-sm uppercase">{option.name}</span>
               </div>
             </GameButton>
           ))}
@@ -142,7 +142,7 @@ const IdentificationGame: React.FC<IdentificationGameProps> = ({
 
       {/* Next Button */}
       {showFeedback && (
-        <div className="animate-fade-in-up">
+        <div className="animate-fade-in-up flex-shrink-0 pb-2">
           <button
             onClick={handleNext}
             className="animate-gentle-bounce hover:scale-105 transition-transform duration-300"
@@ -150,7 +150,7 @@ const IdentificationGame: React.FC<IdentificationGameProps> = ({
             <img 
               src={isCorrect ? proximaFormaBtn : tentarNovamenteBtn} 
               alt={isCorrect ? "Próxima Forma" : "Tentar Novamente"}
-              className="h-auto w-64 sm:w-72"
+              className="h-auto w-48 sm:w-56"
             />
           </button>
         </div>

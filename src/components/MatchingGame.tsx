@@ -214,9 +214,9 @@ const MatchingGame: React.FC<MatchingGameProps> = ({
   }, [shapes]);
 
   return (
-    <div className={cn("flex flex-col items-center justify-start min-h-screen p-4 md:p-8 space-y-4 md:space-y-6 overflow-y-auto", className)}>
+    <div className={cn("flex flex-col items-center justify-start h-screen overflow-hidden p-2 sm:p-3 space-y-2", className)}>
       {/* Vitor with Instructions */}
-      <div className="animate-fade-in-up">
+      <div className="animate-fade-in-up flex-shrink-0">
         <VitorCharacter 
           message={vitorMessage}
           animate={!showCelebration}
@@ -224,8 +224,8 @@ const MatchingGame: React.FC<MatchingGameProps> = ({
       </div>
 
       {/* Instructions */}
-      <div className="text-center animate-fade-in-up px-4" style={{ animationDelay: "0.2s" }}>
-        <h2 className="text-lg md:text-2xl font-bold text-foreground mb-2 uppercase">
+      <div className="text-center animate-fade-in-up px-2 flex-shrink-0" style={{ animationDelay: "0.2s" }}>
+        <h2 className="text-sm sm:text-base md:text-lg font-bold text-foreground uppercase">
           Arraste as formas para seus contornos!
         </h2>
       </div>
@@ -233,21 +233,21 @@ const MatchingGame: React.FC<MatchingGameProps> = ({
       {/* Game Area */}
       <div 
         ref={gameAreaRef}
-        className="relative w-full max-w-4xl h-[450px] md:h-[550px] bg-white/50 rounded-3xl border-2 border-dashed border-accent/30 overflow-hidden animate-fade-in-up flex items-center justify-center"
+        className="relative w-full max-w-3xl h-[280px] sm:h-[320px] md:h-[380px] bg-white/50 rounded-2xl border-2 border-dashed border-accent/30 overflow-hidden animate-fade-in-up flex items-center justify-center flex-shrink"
         style={{ animationDelay: "0.4s" }}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleMouseUp}
       >
-        <div className="relative w-full h-full max-w-[90%] md:max-w-[600px] mx-auto flex items-center justify-between px-4 md:px-8">
+        <div className="relative w-full h-full max-w-[90%] mx-auto flex items-center justify-between px-2 sm:px-4">
           {/* Left Column - Draggable Shapes */}
-          <div className="flex flex-col gap-4 md:gap-6">
+          <div className="flex flex-col gap-2 sm:gap-3">
             {gameShapes.map((shape, index) => (
               <div
                 key={shape.id}
                 className={cn(
-                  "w-20 h-20 md:w-24 md:h-24 cursor-grab active:cursor-grabbing transition-transform duration-200 select-none",
+                  "w-14 h-14 sm:w-16 sm:h-16 md:w-18 md:h-18 cursor-grab active:cursor-grabbing transition-transform duration-200 select-none",
                   shape.isDragging && "scale-110 z-10 rotate-3 fixed",
                   shape.isMatched && "cursor-default animate-celebration opacity-50"
                 )}
@@ -278,13 +278,13 @@ const MatchingGame: React.FC<MatchingGameProps> = ({
           </div>
 
           {/* Right Column - Drop Zones */}
-          <div className="flex flex-col gap-4 md:gap-6">
+          <div className="flex flex-col gap-2 sm:gap-3">
             {dropZones.map((zone, index) => (
               <div
                 key={zone.id}
                 data-drop-zone={zone.id}
                 className={cn(
-                  "w-20 h-20 md:w-24 md:h-24 border-4 border-dashed rounded-2xl flex items-center justify-center transition-all duration-300",
+                  "w-14 h-14 sm:w-16 sm:h-16 md:w-18 md:h-18 border-3 border-dashed rounded-xl flex items-center justify-center transition-all duration-300",
                   zone.isOccupied 
                     ? "border-success bg-success/10" 
                     : "border-muted-foreground/50 bg-muted/30",
@@ -292,7 +292,7 @@ const MatchingGame: React.FC<MatchingGameProps> = ({
                 )}
               >
                 {!zone.isOccupied && (
-                  <span className="text-2xl md:text-3xl opacity-40">{zone.shape.emoji}</span>
+                  <span className="text-xl sm:text-2xl opacity-40">{zone.shape.emoji}</span>
                 )}
               </div>
             ))}
@@ -300,22 +300,22 @@ const MatchingGame: React.FC<MatchingGameProps> = ({
         </div>
       </div>
 
-      {/* Helper Text - Moved outside game area */}
+      {/* Helper Text */}
       {gameShapes.length > 0 && matchedPairs === 0 && (
-        <div className="text-center animate-fade-in-up px-4" style={{ animationDelay: "0.6s" }}>
-          <p className="text-xs md:text-sm text-muted-foreground bg-white/80 px-4 py-2 rounded-full inline-block uppercase">
-            👆 Arraste as formas coloridas para os contornos correspondentes
+        <div className="text-center animate-fade-in-up px-2 flex-shrink-0" style={{ animationDelay: "0.6s" }}>
+          <p className="text-[10px] sm:text-xs text-muted-foreground bg-white/80 px-3 py-1 rounded-full inline-block uppercase">
+            👆 Arraste as formas coloridas para os contornos
           </p>
         </div>
       )}
 
       {/* Progress Indicator */}
-      <div className="flex space-x-2 animate-fade-in-up" style={{ animationDelay: "0.8s" }}>
+      <div className="flex space-x-1.5 animate-fade-in-up flex-shrink-0" style={{ animationDelay: "0.8s" }}>
         {Array.from({ length: gameShapes.length }, (_, index) => (
           <div
             key={index}
             className={cn(
-              "w-4 h-4 rounded-full transition-colors duration-300",
+              "w-3 h-3 rounded-full transition-colors duration-300",
               index < matchedPairs ? "bg-success" : "bg-muted"
             )}
           />
@@ -324,7 +324,7 @@ const MatchingGame: React.FC<MatchingGameProps> = ({
 
       {/* Next Button */}
       {showCelebration && (
-        <div className="animate-fade-in-up">
+        <div className="animate-fade-in-up flex-shrink-0 pb-2">
           <button
             onClick={handleNext}
             className="animate-gentle-bounce hover:scale-105 transition-transform duration-300"
@@ -332,7 +332,7 @@ const MatchingGame: React.FC<MatchingGameProps> = ({
             <img 
               src={proximoDesafioBtn} 
               alt="Próximo Desafio"
-              className="h-auto w-64 sm:w-72"
+              className="h-auto w-48 sm:w-56"
             />
           </button>
         </div>

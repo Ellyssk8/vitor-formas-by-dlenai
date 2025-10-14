@@ -83,9 +83,9 @@ const CountingGame: React.FC<CountingGameProps> = ({
   if (!currentShape) return null;
 
   return (
-    <div className={cn("flex flex-col items-center justify-center min-h-screen p-4 sm:p-6 md:p-8 space-y-4 sm:space-y-6 md:space-y-8", className)}>
+    <div className={cn("flex flex-col items-center justify-between h-screen overflow-hidden p-2 sm:p-3 space-y-2", className)}>
       {/* Vitor with Instructions */}
-      <div className="animate-fade-in-up">
+      <div className="animate-fade-in-up flex-shrink-0">
         <VitorCharacter 
           message={vitorMessage}
           animate={!showFeedback}
@@ -93,14 +93,14 @@ const CountingGame: React.FC<CountingGameProps> = ({
       </div>
 
       {/* Current Shape Display */}
-      <div className="animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
-        <div className="text-center space-y-4">
-          <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-foreground mb-4 sm:mb-6 px-4 uppercase">
+      <div className="animate-fade-in-up flex-shrink" style={{ animationDelay: "0.2s" }}>
+        <div className="text-center space-y-2">
+          <h2 className="text-sm sm:text-base md:text-lg font-bold text-foreground px-2 uppercase">
             Quantos lados tem esta forma?
           </h2>
           <ShapeCard
             shape={currentShape}
-            className="mx-auto w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 text-5xl sm:text-6xl md:text-8xl"
+            className="mx-auto w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 text-4xl sm:text-5xl md:text-6xl"
             animate={!showFeedback}
             showAnswer={showFeedback && isCorrect}
             hideName={true}
@@ -109,13 +109,13 @@ const CountingGame: React.FC<CountingGameProps> = ({
       </div>
 
       {/* Number Options */}
-      <div className="grid grid-cols-3 sm:grid-cols-6 gap-2 sm:gap-3 md:gap-4 w-full max-w-2xl px-4 animate-fade-in-up" style={{ animationDelay: "0.4s" }}>
+      <div className="grid grid-cols-3 sm:grid-cols-6 gap-2 w-full max-w-xl px-2 animate-fade-in-up flex-shrink" style={{ animationDelay: "0.4s" }}>
         {numberOptions.map((number) => (
           <GameButton
             key={number}
             variant="shape"
             className={cn(
-              "h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16 rounded-full text-base sm:text-lg md:text-xl font-bold transition-all duration-300",
+              "h-10 w-10 sm:h-12 sm:w-12 md:h-14 md:w-14 rounded-full text-sm sm:text-base md:text-lg font-bold transition-all duration-300",
               selectedAnswer === number && (
                 isCorrect ? "ring-4 ring-success bg-success/20" : "ring-4 ring-destructive bg-destructive/20"
               ),
@@ -131,8 +131,8 @@ const CountingGame: React.FC<CountingGameProps> = ({
 
       {/* Explanation for circles */}
       {currentShape && (currentShape.name === "Círculo" || currentShape.name === "Oval") && (
-        <div className="text-center animate-fade-in-up px-4" style={{ animationDelay: "0.6s" }}>
-          <p className="text-xs sm:text-sm text-muted-foreground max-w-md uppercase">
+        <div className="text-center animate-fade-in-up px-2 flex-shrink-0" style={{ animationDelay: "0.6s" }}>
+          <p className="text-[10px] sm:text-xs text-muted-foreground max-w-md uppercase">
             💡 Círculos e ovais não têm lados - eles são redondos!
           </p>
         </div>
@@ -140,7 +140,7 @@ const CountingGame: React.FC<CountingGameProps> = ({
 
       {/* Next Button */}
       {showFeedback && (
-        <div className="animate-fade-in-up">
+        <div className="animate-fade-in-up flex-shrink-0 pb-2">
           <button
             onClick={handleNext}
             className="animate-gentle-bounce hover:scale-105 transition-transform duration-300"
@@ -148,7 +148,7 @@ const CountingGame: React.FC<CountingGameProps> = ({
             <img 
               src={isCorrect ? proximaFormaBtn : tentarNovamenteBtn} 
               alt={isCorrect ? "Próxima Forma" : "Tentar Novamente"}
-              className="h-auto w-64 sm:w-72"
+              className="h-auto w-48 sm:w-56"
             />
           </button>
         </div>
