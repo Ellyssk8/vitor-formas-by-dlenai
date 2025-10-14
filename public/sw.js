@@ -1,4 +1,4 @@
-const CACHE_NAME = 'vitor-forms-v5';
+const CACHE_NAME = 'vitor-forms-v6';
 const urlsToCache = [
   '/manifest.json',
   '/icon-192.png',
@@ -6,16 +6,17 @@ const urlsToCache = [
   '/apple-touch-icon.png'
 ];
 
-// Install event - cache resources
+// Install event - cache resources and force immediate activation
 self.addEventListener('install', (event) => {
+  console.log('Service Worker installing - version:', CACHE_NAME);
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then((cache) => {
         console.log('Opened cache');
         return cache.addAll(urlsToCache);
       })
+      .then(() => self.skipWaiting())
   );
-  self.skipWaiting();
 });
 
 // Fetch event - network first, cache fallback
