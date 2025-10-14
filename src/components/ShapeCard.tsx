@@ -10,6 +10,7 @@ interface ShapeCardProps {
   className?: string;
   animate?: boolean;
   hideName?: boolean;
+  size?: "sm" | "md" | "lg" | "xl";
 }
 
 export interface GeometricShape {
@@ -29,6 +30,7 @@ const ShapeCard: React.FC<ShapeCardProps> = ({
   className,
   animate = false,
   hideName = false,
+  size,
 }) => {
   const bgColorMap: Record<string, string> = {
     "blue": "bg-gradient-to-br from-blue-400 to-blue-600",
@@ -57,11 +59,11 @@ const ShapeCard: React.FC<ShapeCardProps> = ({
       )}
     >
       {/* Shape Visual */}
-      <div className="mb-4 drop-shadow-lg">
+      <div className="mb-4 drop-shadow-lg flex items-center justify-center flex-1">
         <ShapeVisual 
           shapeId={shape.id} 
           color={shape.color} 
-          size="lg" 
+          size={size || "lg"}
           className="filter drop-shadow-md"
         />
       </div>

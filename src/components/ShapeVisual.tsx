@@ -18,7 +18,7 @@ import parallelogramImg from "@/assets/shapes/parallelogram.png";
 interface ShapeVisualProps {
   shapeId: string;
   color: string;
-  size?: "sm" | "md" | "lg";
+  size?: "sm" | "md" | "lg" | "xl";
   className?: string;
 }
 
@@ -32,6 +32,7 @@ const ShapeVisual: React.FC<ShapeVisualProps> = ({
     sm: "w-20 h-20",
     md: "w-28 h-28",
     lg: "w-40 h-40",
+    xl: "w-56 h-56",
   };
 
   // Map shape IDs to imported images

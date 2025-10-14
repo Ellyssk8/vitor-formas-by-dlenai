@@ -272,6 +272,7 @@ const MatchingGame: React.FC<MatchingGameProps> = ({
                     shape.isMatched && "ring-2 ring-success"
                   )}
                   hideName={true}
+                  size="xl"
                 />
               </div>
             ))}
